@@ -9,31 +9,29 @@ public class Main {
             Scanner entrada = new Scanner(System.in);
             System.out.println("Digite uma palavra:");
             String palavra = entrada.nextLine().toLowerCase();
-            criptografia(palavra);
+            criptografiaAscii(palavra);
             System.out.println("Deseja criptografar outra palavra? (S/N)");
             continuar = entrada.nextLine().toLowerCase(Locale.ROOT);
         }
         while(!Objects.equals(continuar, "n"));
     }
 
-    public static void criptografia(String palavra){
-        ArrayList<Character> alfabeto = new ArrayList<Character>(Arrays.asList('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'));
+    public static void criptografiaAscii(String palavra){
         char[] cifra = new char[palavra.length()];
-
         for(int i = 0; i < palavra.length(); i++){
-            char letraOriginal = palavra.charAt(i);
-            int indexOriginal = alfabeto.indexOf(letraOriginal);
-            int indexCriptografado = indexOriginal + 3;
-            if (indexCriptografado >= 26){
-                indexCriptografado = indexCriptografado - 26;
+            int letraOriginal = palavra.charAt(i);
+            if (letraOriginal >= 120){
+                letraOriginal = letraOriginal - 26;
             }
-            char letraCriptografada = alfabeto.get(indexCriptografado);
-            cifra[i] = letraCriptografada;
+            char letraNova = (char) (letraOriginal + 3);
+            cifra[i] = letraNova;
         }
         String output = "";
         for (char c : cifra) {
             output = output + c;
         }
         System.out.println("Sua palavra criptografada é: "+ output);
+
     }
+
 }
